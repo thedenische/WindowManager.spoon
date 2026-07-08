@@ -1,0 +1,225 @@
+[
+  {
+    "Command": [],
+    "Constant": [],
+    "Constructor": [],
+    "Deprecated": [],
+    "Field": [],
+    "Function": [],
+    "Method": [
+      {
+        "def": "WindowManager:moveWindowToScreen(direction) -> self",
+        "desc": "Move the focused window to the monitor physically adjacent in `direction`.",
+        "doc": "Move the focused window to the monitor physically adjacent in `direction`.\n\nParameters:\n * direction - one of `\"east\"`, `\"west\"`, `\"north\"`, `\"south\"`. The target is the display in that direction relative to the window's current screen, so it follows the physical monitor layout (no wrap-around). If there is no monitor in that direction an alert is shown and nothing moves. If the window is in native full screen it is taken out of full screen, moved, and put back on the target display.\n\nReturns:\n * The WindowManager object",
+        "name": "moveWindowToScreen",
+        "notes": [],
+        "parameters": [
+          " * direction - one of `\"east\"`, `\"west\"`, `\"north\"`, `\"south\"`. The target is the display in that direction relative to the window's current screen, so it follows the physical monitor layout (no wrap-around). If there is no monitor in that direction an alert is shown and nothing moves. If the window is in native full screen it is taken out of full screen, moved, and put back on the target display."
+        ],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:moveWindowToScreen(direction) -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:maximizeWindow() -> self",
+        "desc": "Maximize the focused window, remembering its current frame first so `restoreWindow` can put it back.",
+        "doc": "Maximize the focused window, remembering its current frame first so `restoreWindow` can put it back.\n\nReturns:\n * The WindowManager object",
+        "name": "maximizeWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:maximizeWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:restoreWindow() -> self",
+        "desc": "Restore the focused window: drop out of native full screen if it is in it, otherwise put it back to the frame saved by `maximizeWindow`.",
+        "doc": "Restore the focused window: drop out of native full screen if it is in it, otherwise put it back to the frame saved by `maximizeWindow`.\n\nReturns:\n * The WindowManager object",
+        "name": "restoreWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:restoreWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:toggleMaximize() -> self",
+        "desc": "Toggle the focused window between maximized and its previous size.",
+        "doc": "Toggle the focused window between maximized and its previous size: maximize it if it is not currently maximized (or full screen), otherwise restore it. Uses the frame saved by `maximizeWindow`, and exits native full screen if the window is in it.\n\nReturns:\n * The WindowManager object",
+        "name": "toggleMaximize",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:toggleMaximize() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:minimizeWindow() -> self",
+        "desc": "Minimize the focused window to the Dock.",
+        "doc": "Minimize the focused window to the Dock. This is one-way: macOS gives a minimized window no focus, so there is no reliable target to un-minimize from a hotkey (click it in the Dock, or use the app's window menu, to bring back).\n\nReturns:\n * The WindowManager object",
+        "name": "minimizeWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:minimizeWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:fullscreenWindow() -> self",
+        "desc": "Put the focused window into native macOS full screen.",
+        "doc": "Put the focused window into native macOS full screen.\n\nReturns:\n * The WindowManager object",
+        "name": "fullscreenWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:fullscreenWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:bindHotkeys(mapping) -> self",
+        "desc": "Binds hotkeys for WindowManager.",
+        "doc": "Binds hotkeys for WindowManager.\n\nParameters:\n * mapping - A table with any of the keys `moveWest`, `moveEast`, `moveNorth`, `moveSouth`, `toggleMaximize`, `maximize`, `restore`, `minimize`, `fullscreen`, each a `{ mods, key }` pair (e.g. `{ {\"ctrl\",\"cmd\"}, \"l\" }`). Missing keys fall back to `WindowManager.defaultHotkeys` (which binds `toggleMaximize`, not the separate `maximize` / `restore`).\n\nReturns:\n * The WindowManager object",
+        "name": "bindHotkeys",
+        "notes": [],
+        "parameters": [
+          " * mapping - A table with any of the keys `moveWest`, `moveEast`, `moveNorth`, `moveSouth`, `toggleMaximize`, `maximize`, `restore`, `minimize`, `fullscreen`, each a `{ mods, key }` pair (e.g. `{ {\"ctrl\",\"cmd\"}, \"l\" }`). Missing keys fall back to `WindowManager.defaultHotkeys` (which binds `toggleMaximize`, not the separate `maximize` / `restore`)."
+        ],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:bindHotkeys(mapping) -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      }
+    ],
+    "Variable": [],
+    "desc": "Simple window management for Hammerspoon: move the focused window between monitors (with full-screen handling), maximize / restore it, or push it to native full screen.",
+    "doc": "Simple window management for Hammerspoon: move the focused window between monitors (with full-screen handling), maximize / restore it, or push it to native full screen.\n\n`moveWindowToScreen` moves the focused window to the monitor physically adjacent in a given direction (`\"east\"` / `\"west\"` / `\"north\"` / `\"south\"`), following the display layout rather than an arbitrary ordering. If the window is in native full screen it is briefly taken out of full screen, moved, then put back -- so full-screen windows follow you across displays instead of refusing to move.\n\n`maximizeWindow` remembers the window's current frame before maximizing, and `restoreWindow` puts it back (or drops out of full screen first if needed).",
+    "items": [
+      {
+        "def": "WindowManager:bindHotkeys(mapping) -> self",
+        "desc": "Binds hotkeys for WindowManager.",
+        "doc": "Binds hotkeys for WindowManager.\n\nParameters:\n * mapping - A table with any of the keys `moveWest`, `moveEast`, `moveNorth`, `moveSouth`, `toggleMaximize`, `maximize`, `restore`, `minimize`, `fullscreen`, each a `{ mods, key }` pair (e.g. `{ {\"ctrl\",\"cmd\"}, \"l\" }`). Missing keys fall back to `WindowManager.defaultHotkeys` (which binds `toggleMaximize`, not the separate `maximize` / `restore`).\n\nReturns:\n * The WindowManager object",
+        "name": "bindHotkeys",
+        "notes": [],
+        "parameters": [
+          " * mapping - A table with any of the keys `moveWest`, `moveEast`, `moveNorth`, `moveSouth`, `toggleMaximize`, `maximize`, `restore`, `minimize`, `fullscreen`, each a `{ mods, key }` pair (e.g. `{ {\"ctrl\",\"cmd\"}, \"l\" }`). Missing keys fall back to `WindowManager.defaultHotkeys` (which binds `toggleMaximize`, not the separate `maximize` / `restore`)."
+        ],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:bindHotkeys(mapping) -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:fullscreenWindow() -> self",
+        "desc": "Put the focused window into native macOS full screen.",
+        "doc": "Put the focused window into native macOS full screen.\n\nReturns:\n * The WindowManager object",
+        "name": "fullscreenWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:fullscreenWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:maximizeWindow() -> self",
+        "desc": "Maximize the focused window, remembering its current frame first so `restoreWindow` can put it back.",
+        "doc": "Maximize the focused window, remembering its current frame first so `restoreWindow` can put it back.\n\nReturns:\n * The WindowManager object",
+        "name": "maximizeWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:maximizeWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:minimizeWindow() -> self",
+        "desc": "Minimize the focused window to the Dock.",
+        "doc": "Minimize the focused window to the Dock. This is one-way: macOS gives a minimized window no focus, so there is no reliable target to un-minimize from a hotkey (click it in the Dock, or use the app's window menu, to bring back).\n\nReturns:\n * The WindowManager object",
+        "name": "minimizeWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:minimizeWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:moveWindowToScreen(direction) -> self",
+        "desc": "Move the focused window to the monitor physically adjacent in `direction`.",
+        "doc": "Move the focused window to the monitor physically adjacent in `direction`.\n\nParameters:\n * direction - one of `\"east\"`, `\"west\"`, `\"north\"`, `\"south\"`. The target is the display in that direction relative to the window's current screen, so it follows the physical monitor layout (no wrap-around). If there is no monitor in that direction an alert is shown and nothing moves. If the window is in native full screen it is taken out of full screen, moved, and put back on the target display.\n\nReturns:\n * The WindowManager object",
+        "name": "moveWindowToScreen",
+        "notes": [],
+        "parameters": [
+          " * direction - one of `\"east\"`, `\"west\"`, `\"north\"`, `\"south\"`. The target is the display in that direction relative to the window's current screen, so it follows the physical monitor layout (no wrap-around). If there is no monitor in that direction an alert is shown and nothing moves. If the window is in native full screen it is taken out of full screen, moved, and put back on the target display."
+        ],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:moveWindowToScreen(direction) -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:restoreWindow() -> self",
+        "desc": "Restore the focused window: drop out of native full screen if it is in it, otherwise put it back to the frame saved by `maximizeWindow`.",
+        "doc": "Restore the focused window: drop out of native full screen if it is in it, otherwise put it back to the frame saved by `maximizeWindow`.\n\nReturns:\n * The WindowManager object",
+        "name": "restoreWindow",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:restoreWindow() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "WindowManager:toggleMaximize() -> self",
+        "desc": "Toggle the focused window between maximized and its previous size.",
+        "doc": "Toggle the focused window between maximized and its previous size: maximize it if it is not currently maximized (or full screen), otherwise restore it. Uses the frame saved by `maximizeWindow`, and exits native full screen if the window is in it.\n\nReturns:\n * The WindowManager object",
+        "name": "toggleMaximize",
+        "notes": [],
+        "parameters": [],
+        "returns": [
+          " * The WindowManager object"
+        ],
+        "signature": "WindowManager:toggleMaximize() -> self",
+        "stripped_doc": "",
+        "type": "Method"
+      }
+    ],
+    "name": "WindowManager",
+    "stripped_doc": "",
+    "submodules": [],
+    "type": "Module"
+  }
+]
